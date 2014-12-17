@@ -20,12 +20,13 @@ function connect(name) {
         {
             name: name
         }, 
-        function(res) {
-            stompClient.subscribe('/WSRes/chat', function(){
+        function succes(res) {
+            stompClient.subscribe('/WSRes/chat', function subscribed(res){
+                console.log("subscribed!!!!!!!");
                 setConnected(true);
             }, {name: name});
         },
-        function(res) {
+        function error(res) {
             $(".connect-btn").html(res.headers.message);
             $(".screen-name").val("");
             disconnect();
