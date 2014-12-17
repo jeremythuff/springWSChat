@@ -36,6 +36,7 @@ public class WSConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		registry.addEndpoint("/chat").withSockJS();
 	}
 	
+	@Override
 	public void configureClientInboundChannel(ChannelRegistration registration) {
 	    registration.setInterceptors(new TopicSubscriptionInterceptor(currentUserRepo));
 	}

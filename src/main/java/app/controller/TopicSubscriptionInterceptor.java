@@ -1,6 +1,5 @@
 package app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;

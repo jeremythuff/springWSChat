@@ -20,7 +20,7 @@ function connect(name) {
         {
             name: name
         }, 
-        function succes(res) {
+        function success(res) {
             stompClient.subscribe('/WSRes/chat', function subscribed(res){
                 console.log("subscribed!!!!!!!");
                 setConnected(true);
