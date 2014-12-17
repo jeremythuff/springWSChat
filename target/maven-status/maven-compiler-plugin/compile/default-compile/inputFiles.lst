@@ -1,9 +1,9 @@
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/App.java
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/CurrentUserRepo.java
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/controller/TopicSubscriptionInterceptor.java
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/WSIn.java
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/WSOut.java
 /Users/huff/development/java/apps/springWSChat/src/main/java/app/model/User.java
 /Users/huff/development/java/apps/springWSChat/src/main/java/app/config/WSConfig.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/CurrentUserRepo.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/App.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/WSOut.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/controller/WSController.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/model/WSIn.java
 /Users/huff/development/java/apps/springWSChat/src/main/java/app/controller/StompConnectEvent.java
-/Users/huff/development/java/apps/springWSChat/src/main/java/app/controller/TopicSubscriptionInterceptor.java
+/Users/huff/development/java/apps/springWSChat/src/main/java/app/controller/WSController.java

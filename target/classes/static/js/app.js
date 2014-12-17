@@ -27,7 +27,7 @@ function connect(name) {
         },
         function(res) {
             $(".connect-btn").html(res.headers.message);
-            $(".screen-name").html("");
+            $(".screen-name").val("");
             disconnect();
         });
 

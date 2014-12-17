@@ -1,9 +1,9 @@
-app/controller/WSController.class
-app/config/WSConfig.class
-app/controller/StompConnectEvent.class
 app/model/WSOut.class
-app/model/User.class
-app/App.class
-app/model/WSIn.class
 app/model/CurrentUserRepo.class
+app/config/WSConfig.class
+app/model/User.class
+app/controller/StompConnectEvent.class
+app/model/WSIn.class
+app/App.class
 app/controller/TopicSubscriptionInterceptor.class
+app/controller/WSController.class
