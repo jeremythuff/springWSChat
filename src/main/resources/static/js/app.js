@@ -1,22 +1,36 @@
 var stompClient = null;
 
 function setConnected(connected) {
-    document.getElementById('connect').disabled = connected;
-    document.getElementById('disconnect').disabled = !connected;
-    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-    document.getElementById('response').innerHTML = '';
+   if(connected) {
+        $(".app-splash").fadeOut(300, function() {
+            $(".app-content").show(300); 
+        }); 
+   } else {
+        $(".app-content").fadeOut(300, function() {
+            $(".app-splash").show(300); 
+        }); 
+   }
 }
 
-function connect() {
-    var socket = new SockJS('/hello');
+function connect(name) {
+    var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function(frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/WSRes/hello', function(greeting){
-            showGreeting(JSON.parse(greeting.body).content);
+    
+    stompClient.connect(
+        {
+            name: name
+        }, 
+        function(res) {
+            stompClient.subscribe('/WSRes/chat', function(){
+                setConnected(true);
+            }, {name: name});
+        },
+        function(res) {
+            $(".connect-btn").html(res.headers.message);
+            $(".screen-name").html("");
+            disconnect();
         });
-    });
+
 }
 
 function disconnect() {
@@ -27,7 +41,7 @@ function disconnect() {
 
 function sendName() {
     var name = document.getElementById('name').value;
-    stompClient.send("/ws/hello", {}, JSON.stringify({ 'name': name }));
+    stompClient.send("/ws/chat", {}, JSON.stringify({ 'name': name }));
 }
 
 function showGreeting(message) {
@@ -37,3 +51,17 @@ function showGreeting(message) {
     p.appendChild(document.createTextNode(message));
     response.appendChild(p);
 }
+
+$(".connect-btn").on("click", function() {
+    var $this = $(this);
+    var name = $(".screen-name").val();
+
+    if(name != "") {
+        connect(name);
+    } else {
+        $this.html("Input Screen Name")
+    }
+
+    return false;
+
+});
