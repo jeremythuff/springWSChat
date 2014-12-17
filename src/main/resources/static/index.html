@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WS Chat</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+		
+		<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+		<link rel="stylesheet" href="css/lib/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="js/lib/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+
+		 <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WS Chat</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Screen Name" class="form-control screen-name">
+            </div>
+            <!--<div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>-->
+            <button type="submit" class="btn btn-success connect-btn">Connect</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+	
+
+  <div class="row app-splash">
+    <h1>Welcome!</h1>
+  </div>
+	
+	<div class="row app-content">
+		<div class="col-sm-7 col-sm-offset-1 chat-window">
+			<div class="message-wrapper">
+				<span class="message-name">Jeremy</span>:
+				<span class="message-content">Hello</span>
+			</div>
+			<div class="message-wrapper">
+				<span class="message-name">Bob</span>:
+				<span class="message-content">Hello youself!</span>
+			</div>
+		</div>
+		<div class="col-sm-3 col-sm-offset-1 room-occupants">
+			<div class="sidebar-module">
+				<ul class="list-unstyled">
+					<li>Jeremy</li>
+					<li>Bob</li>
+					<li>Carter</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="footer">
+    	<input type="text" placeholder="chat" class="form-control chatInput">
+    </footer>
+
+	<!--  Scripts here -->
+    <script src="js/lib/sockjs-0.3.4.js"></script>
+    <script src="js/lib/stomp.js"></script>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+
+
+</body>
+</html>
