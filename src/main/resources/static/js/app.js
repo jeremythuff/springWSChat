@@ -28,7 +28,12 @@ function connect(name) {
         function success(res) { 
             setConnected(true);
             stompClient.subscribe('/WSRes/chat', function subscribed(res){
-                showMessage(JSON.parse(res.body));    
+                
+                var resObj = JSON.parse(res.body)
+
+                //if(resObj.action = "CHAT") showMessage(resObj);
+                if(resObj.action = "UPDATE") updateUsers(resObj);    
+            
             }, {name: name});
         },
         function error(res) {
@@ -45,6 +50,11 @@ function disconnect() {
     stompClient.disconnect();
     setConnected(false);
 }
+
+function updateUsers(update) { 
+    $(".room-occupants").append("<li>"+update.name+"</li>");
+}
+
 
 function showMessage(message) {
 
@@ -68,7 +78,15 @@ $(".chatInput").on("keypress", function(e) {
         $this.val("");
         var name = $(".screen-name").val();
 
-        stompClient.send("/ws/chat", {name: name}, JSON.stringify({ 'message': message, 'name': name }));
+        stompClient.send("/ws/chat", 
+            {
+                name: name
+            }, 
+            JSON.stringify({ 
+                'message': message, 
+                'name': name 
+            }
+        ));
     }
 
 });

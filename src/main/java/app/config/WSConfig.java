@@ -9,8 +9,8 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import app.controller.events.StompDisconnectEvent;
-import app.controller.events.TopicSubscriptionInterceptor;
+import app.controller.eventInterceptors.StompDisconnectEvent;
+import app.controller.eventInterceptors.TopicSubscriptionInterceptor;
 import app.model.CurrentUserRepo;
 
 @Configuration

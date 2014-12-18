@@ -1,4 +1,4 @@
-package app.controller.events;
+package app.controller.eventInterceptors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;

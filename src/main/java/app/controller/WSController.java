@@ -3,7 +3,6 @@ package app.controller;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.WSIn;
 import app.model.WSOut;
@@ -13,8 +12,14 @@ public class WSController {
 
     @MessageMapping("/chat")
     @SendTo("/WSRes/chat")
-    public WSOut greeting(@RequestParam(value="message", defaultValue="World") WSIn message) throws Exception {
-    	return new WSOut(message.getMessage(), message.getName());
+    public WSOut message(WSIn message) throws Exception {
+    	return new WSOut("CHAT",message.getMessage(), message.getName());
+    }
+    
+    @MessageMapping("/update")
+    @SendTo("/WSRes/chat")
+    public WSOut update(String user) throws Exception {
+    	return new WSOut("UPDATE", user, "");
     }
 }
 
