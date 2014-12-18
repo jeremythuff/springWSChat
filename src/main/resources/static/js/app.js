@@ -1,13 +1,21 @@
 var stompClient = null;
 
 function setConnected(connected) {
-   if(connected) {
+   if(connected) {     
+        $(".connect-btn").fadeOut(300);
         $(".app-splash").fadeOut(300, function() {
-            $(".app-content").show(300); 
+            $(".app-content").show(300);
+            $(".disconnect-btn").fadeIn(300)
+            $(".screen-name").attr("disabled", true);
+            $(".chatInput").show(300); 
         }); 
    } else {
-        $(".app-content").fadeOut(300, function() {
-            $(".app-splash").show(300); 
+        $(".chatInput").fadeOut(350);
+        $(".disconnect-btn").fadeOut(350);
+        $(".app-content").fadeOut(350, function() {
+            $(".connect-btn").fadeIn(350);
+            $(".screen-name").val("").attr("disabled", false);
+            $(".app-splash").show(350); 
         }); 
    }
 }
@@ -16,43 +24,56 @@ function connect(name) {
     var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
     
-    stompClient.connect(
-        {
-            name: name
-        }, 
-        function success(res) {
+    stompClient.connect({name: name}, 
+        function success(res) { 
+            setConnected(true);
             stompClient.subscribe('/WSRes/chat', function subscribed(res){
-                console.log("subscribed!!!!!!!");
-                setConnected(true);
+                showMessage(JSON.parse(res.body));    
             }, {name: name});
         },
         function error(res) {
+            setTimeout(function() {
+                    disconnect();
+                }, 1500);
             $(".connect-btn").html(res.headers.message);
             $(".screen-name").val("");
-            disconnect();
-        });
-
+        }
+    );
 }
 
 function disconnect() {
     stompClient.disconnect();
     setConnected(false);
-    console.log("Disconnected");
 }
 
-function sendName() {
-    var name = document.getElementById('name').value;
-    stompClient.send("/ws/chat", {}, JSON.stringify({ 'name': name }));
+function showMessage(message) {
+
+    var messageTemplate = '<div class="message-wrapper">' +
+                            '<span class="message-name">'+message.name+'</span>:' +
+                            '<span class="message-content">'+ message.message+'</span>' +
+                          '</div>';
+
+    $(".chat-window").append(messageTemplate);
+    $(".chat-window").scrollTop($(".chat-window")[0].scrollHeight);
+
 }
 
-function showGreeting(message) {
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.style.wordWrap = 'break-word';
-    p.appendChild(document.createTextNode(message));
-    response.appendChild(p);
-}
 
+$(".chatInput").on("keypress", function(e) { 
+
+    var $this = $(this);
+
+    if(e.keyCode == 13) {
+        var message = $this.val();
+        $this.val("");
+        var name = $(".screen-name").val();
+
+        stompClient.send("/ws/chat", {name: name}, JSON.stringify({ 'message': message, 'name': name }));
+    }
+
+});
+
+    
 $(".connect-btn").on("click", function() {
     var $this = $(this);
     var name = $(".screen-name").val();
@@ -62,6 +83,14 @@ $(".connect-btn").on("click", function() {
     } else {
         $this.html("Input Screen Name")
     }
+
+    return false;
+
+});
+
+$(".disconnect-btn").on("click", function() {
+    
+    disconnect()
 
     return false;
 

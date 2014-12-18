@@ -41,6 +41,7 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>-->
             <button type="submit" class="btn btn-success connect-btn">Connect</button>
+            <button type="submit" class="btn btn-error disconnect-btn">Disconnect</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -48,26 +49,17 @@
 	
 
   <div class="row app-splash">
-    <h1>Welcome!</h1>
+    <div class="col-sm-7 col-sm-offset-1">
+      <h1>Welcome!</h1>
+    </div>
   </div>
 	
 	<div class="row app-content">
 		<div class="col-sm-7 col-sm-offset-1 chat-window">
-			<div class="message-wrapper">
-				<span class="message-name">Jeremy</span>:
-				<span class="message-content">Hello</span>
-			</div>
-			<div class="message-wrapper">
-				<span class="message-name">Bob</span>:
-				<span class="message-content">Hello youself!</span>
-			</div>
 		</div>
-		<div class="col-sm-3 col-sm-offset-1 room-occupants">
+		<div class="col-sm-3 col-sm-offset-1">
 			<div class="sidebar-module">
-				<ul class="list-unstyled">
-					<li>Jeremy</li>
-					<li>Bob</li>
-					<li>Carter</li>
+				<ul class="list-unstyled room-occupants">
 				</ul>
 			</div>
 		</div>
@@ -75,8 +67,8 @@
 
 
 	<footer class="footer">
-    	<input type="text" placeholder="chat" class="form-control chatInput">
-    </footer>
+  	<input type="text" placeholder="chat" class="form-control chatInput">
+  </footer>
 
 	<!--  Scripts here -->
     <script src="js/lib/sockjs-0.3.4.js"></script>

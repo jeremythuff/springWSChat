@@ -9,21 +9,21 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import app.controller.StompConnectEvent;
-import app.controller.TopicSubscriptionInterceptor;
+import app.controller.events.StompDisconnectEvent;
+import app.controller.events.TopicSubscriptionInterceptor;
 import app.model.CurrentUserRepo;
 
 @Configuration
 @EnableWebSocketMessageBroker
 public class WSConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	
-	@Bean
-    public StompConnectEvent stompConnectEvent() {
-        return new StompConnectEvent();
-    }
-	
 	@Autowired
 	private CurrentUserRepo currentUserRepo;
+
+	@Bean
+    public StompDisconnectEvent stompConnectEvent() {
+        return new StompDisconnectEvent();
+    }
 	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {

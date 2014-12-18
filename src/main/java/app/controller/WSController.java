@@ -14,7 +14,7 @@ public class WSController {
     @MessageMapping("/chat")
     @SendTo("/WSRes/chat")
     public WSOut greeting(@RequestParam(value="message", defaultValue="World") WSIn message) throws Exception {
-    	return new WSOut("Hello, " + message.getName() + "!");
+    	return new WSOut(message.getMessage(), message.getName());
     }
 }
 
