@@ -21,6 +21,7 @@ public class WSController {
     @MessageMapping("/user/update")
     @SendTo("/WSRes/chat")
     public WSOut update(List<String> users) throws Exception {
+    	System.out.println("Send update");
     	return new WSOut("UPDATE", users);
     }
 }

@@ -31,7 +31,7 @@ public class TopicSubscriptionInterceptor extends ChannelInterceptorAdapter {
 	        String  name = headerAccessor.getNativeHeader("name").get(0);
 	        String  sessionId = headerAccessor.getSessionId();
         
-            if(!validateSubscription(name, sessionId)) {
+            if(!validateSubscription(name, sessionId, channel)) {
                 throw new IllegalArgumentException("Name in use");
             } else {
             	System.out.println("User " + name + " added");
@@ -53,21 +53,21 @@ public class TopicSubscriptionInterceptor extends ChannelInterceptorAdapter {
 		return message;    
     }
 	
-	private boolean validateSubscription(String name, String sessionId)
+	private boolean validateSubscription(String name, String sessionId, MessageChannel channel)
 	{
 		Boolean validated = false;
 		
-		 if(currentUserRepo.findAll() == null) {
-        	currentUserRepo.save(new User(sessionId, name));
+		
+		
+		 if((currentUserRepo.findAll() == null) || (currentUserRepo.getUserByName(name) == null)) {
+        	 User user = new User();
+        	 user.setName(name);
+        	 user.setSessionId(sessionId);
+        	 user.setChannel(channel);
+			 currentUserRepo.save(user);
     		System.out.println("Connect event [sessionId: " + sessionId +"; name: "+ name + " ]");
     		validated = true;
-		 } 
-        
-        if(currentUserRepo.getUserByName(name) == null) {
-        	currentUserRepo.save(new User(sessionId, name));
-    		System.out.println("Connect event [sessionId: " + sessionId +"; user: "+ name + " ]");
-    		validated = true;
-    	}
+		 }
 		
 		return validated;
 	}
