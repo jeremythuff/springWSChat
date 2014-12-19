@@ -31,8 +31,8 @@ function connect(name) {
                 
                 var resObj = JSON.parse(res.body)
 
-                //if(resObj.action = "CHAT") showMessage(resObj);
-                if(resObj.action = "UPDATE") updateUsers(resObj);    
+                if(resObj.action == "CHAT") showMessage(resObj);
+                if(resObj.action == "UPDATE") updateUsers(resObj);    
             
             }, {name: name});
         },
@@ -51,8 +51,15 @@ function disconnect() {
     setConnected(false);
 }
 
-function updateUsers(update) { 
-    $(".room-occupants").append("<li>"+update.name+"</li>");
+function updateUsers(update) {
+	
+	$(".room-occupants").html("");
+	
+	$(update.users).each(function(index, user) {
+		$(".room-occupants").append("<li>"+user+"</li>");
+	});
+	
+    
 }
 
 

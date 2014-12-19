@@ -1,5 +1,9 @@
 package app.controller.eventInterceptors;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -31,8 +35,17 @@ public class TopicSubscriptionInterceptor extends ChannelInterceptorAdapter {
                 throw new IllegalArgumentException("Name in use");
             } else {
             	System.out.println("User " + name + " added");
+            	 	
+            	List<String> userNames = new ArrayList<String>();
+            	
+            	for(User user : currentUserRepo.findAll()) {
+            		userNames.add(user.getName());
+            	}
+            	
+            	System.out.println("usersNames is "+userNames.size());
+            	
             	SimpMessagingTemplate messageTemplate = new SimpMessagingTemplate(channel);
-            	messageTemplate.convertAndSend("/ws/update", name);
+            	messageTemplate.convertAndSend("/ws/user/update", userNames);
             }
             
         }
